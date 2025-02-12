@@ -9,87 +9,87 @@ import "react-photo-view/dist/react-photo-view.css"
 const photos = [
   {
     src: "/1.jpeg",
-    caption: "Our first date at the park",
+    caption: "İlk tiyatromuzda senin gibi güzeller güzeli bir kızla tanıştığım için harika bir gün geçirmiştim.",
   },
   { 
     src: "2.jpeg",
-    caption: "That time we went to the beach",
+    caption: "Beraber bugün kahve içmiştik ve güzelliğine hayran bir şekilde büyülenmiştim.",
   },
   {
     src: "3.jpeg",
-    caption: "Our favorite coffee shop",
+    caption: "Bitki çayının bu kadar pahalı olması senin sinirini bozmuştu sevgilim ve yine her zamanki gibi çok tatlıydın❤️",
   },
   {
     src: "4.jpeg",
-    caption: "The day we adopted our pet",
+    caption: "Yurtdışında seni çok özlemiştim ve hemen koşa koşa yanına geldim bugün💐",
   },
   {
     src: "5.jpeg",
-    caption: "Our first movie night together",
+    caption: "Allahım bayılıyorum elini tutmaya bana o kadar huzur veriyor ki...",
   },
   {
     src: "6.jpeg",
-    caption: "That beautiful sunset we watched",
+    caption: "Tiyatroya gittiğimiz güzel bir yaz gecesi ve benim bebeğim her zamanki gibi çok güzel❤️",
   },
   {
     src: "7.jpeg",
-    caption: "Our first dinner date",
+    caption: "Ayakkabımı hikayende paylaşmıştın bir de açıklama yapmıştın tatlış şey seni",
   },
   {
     src: "8.jpeg",
-    caption: "The day we went hiking",
+    caption: "Dünyanın ennnnnn güzel prensesi❤️❤️❤️",
   },
   {
     src: "9.jpeg",
-    caption: "Our ice cream adventure",
+    caption: "Seninle yağmurda yürümek bile çok tatlı",
   },
   {
     src: "10.jpeg",
-    caption: "Dancing in the rain",
+    caption: "O gün gideceğim için kahvaltı yapasım bile gelmemişti seni çok özleyeceğimi biliyordum çünkü",
   },
   {
     src: "11.jpeg",
-    caption: "Our first holiday together",
+    caption: "Gözlerine hayran kaldığım başka bir an daha..",
   },
   {
     src: "12.jpeg",
-    caption: "That picnic in the park",
+    caption: "Beni hep böyle öper misin? 🥺",
   },
   {
     src: "13.jpeg",
-    caption: "Star gazing night",
+    caption: "En sevdiğin fotoğrafı da koymak istedim😽",
   },
   {
     src: "14.jpeg",
-    caption: "Our cooking experiment",
+    caption: "Burada civciv gibisinn🐣",
   },
   {
     src: "15.jpeg",
-    caption: "The carnival date",
+    caption: "Veee o an. Hayatımın en harika en aşk dolu tatili❤️",
   },
   {
     src: "16.jpeg",
-    caption: "Our first road trip",
+    caption: "Sana sahip olduğum için o kadar mutluyum ki anlatamam..",
   },
   {
     src: "17.jpeg",
-    caption: "That time we went bowling",
+    caption: "Seninle gezmek, seninle eğlenmek, hayatımı seninle geçirmek harika bir duygu",
   },
   {
     src: "18.jpeg",
-    caption: "Our garden project",
+    caption: "Seni sevmek çok güzel bir duygu💐",
   },
   {
     src: "19.jpeg",
-    caption: "The surprise birthday party",
+    caption: "Seninle olmak, seninle masmavi sularda huzur içinde tatil yapmak çok güzel bir duygu",
   },
   {
     src: "20.jpeg",
-    caption: "Our karaoke night",
+    caption: "Seni bu hayatta her şeyden daha çok seviyorum. Şu an bunları yazarken gözlerim doldu çok uzatamayacağım.",
   },
   {
     src: "21.jpeg",
-    caption: "The day we made promises",
+    caption: "Sevgililer günümüz kutlu olsun sevgilim seni ömrümün sonuna dek çok seveceğim❤️",
   },
 ]
 

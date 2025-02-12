@@ -58,7 +58,7 @@ function App() {
       <div 
         style={{
           position: 'fixed',
-          bottom: '10px',
+          bottom: '5px',
           left: '10px',
           color: 'rgba(82, 80, 80, 0.6)',
           fontSize: '12px',
