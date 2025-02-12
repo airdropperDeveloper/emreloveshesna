@@ -73,7 +73,7 @@ function App() {
         style={{
           position: 'fixed',
           bottom: '20px',
-          right: '20px',
+          right: '30px',
           zIndex: 1000,
           padding: '10px',
           borderRadius: '50%',

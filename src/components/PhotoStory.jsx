@@ -121,7 +121,7 @@ function PhotoStory({ onComplete }) {
         style={{
           position: 'absolute',
           top: '20px',
-          right: '20px',
+          right: '30px',
           padding: '8px',
           borderRadius: '50%',
           backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -148,6 +148,7 @@ function PhotoStory({ onComplete }) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
+              style={{ display: 'flex', justifyContent: 'center' }}
             >
               <PhotoView src={photos[currentPhotoIndex].src}>
                 <img
