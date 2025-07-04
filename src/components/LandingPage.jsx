@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 
-function LandingPage({ onExplore }) {
+function LandingPage({ onExplore, onGoToUpload }) {
   return (
     <motion.div
       className="landing-page"
@@ -11,6 +11,7 @@ function LandingPage({ onExplore }) {
       <h1>"Dünyanın en güzel kızına hazırlandı❤️"</h1>
       <h1>Hazırsan başlayalım!</h1>
       <button onClick={onExplore}>Beni dünyanın en güzel çiftinin hikayesine götür.</button>
+      <button onClick={onGoToUpload}>Hikayemize yeni anı ekle 📸</button>
     </motion.div>
   )
 }

@@ -1,12 +1,13 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { PhotoProvider, PhotoView } from "react-photo-view"
 import { IoHomeOutline } from "react-icons/io5"
+import photoService from "../services/photoService"
 import "react-photo-view/dist/react-photo-view.css"
 
-const photos = [
+const staticPhotos = [
   {
     src: "/1.jpeg",
     caption: "İlk tiyatromuzda senin gibi güzeller güzeli bir kızla tanıştığım için harika bir gün geçirmiştim.",
@@ -95,6 +96,26 @@ const photos = [
 
 function PhotoStory({ onComplete }) {
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0)
+  const [photos, setPhotos] = useState(staticPhotos)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const loadPhotos = async () => {
+      try {
+        const additionalPhotos = await photoService.getAllPhotos()
+        // Sabit fotoğraflar + veritabanından gelen fotoğraflar
+        setPhotos([...staticPhotos, ...additionalPhotos])
+      } catch (error) {
+        console.error("Fotoğraflar yüklenirken hata:", error)
+        // Hata durumunda sadece sabit fotoğrafları göster
+        setPhotos(staticPhotos)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadPhotos()
+  }, [])
 
   const nextPhoto = () => {
     if (currentPhotoIndex < photos.length - 1) {
@@ -106,6 +127,23 @@ function PhotoStory({ onComplete }) {
 
   const prevPhoto = () => {
     setCurrentPhotoIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : prevIndex))
+  }
+
+  if (loading) {
+    return (
+      <div className="photo-story">
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          alignItems: 'center', 
+          height: '100vh',
+          fontSize: '1.5rem',
+          color: '#ff4d4d'
+        }}>
+          Hikayemiz yükleniyor... 💕
+        </div>
+      </div>
+    )
   }
 
   return (

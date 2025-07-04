@@ -29,6 +29,180 @@
   text-align: center;
 }
 
+/* Upload Page Styles */
+.upload-page {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #ffe6e6 0%, #ffb3b3 100%);
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.back-button {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #ff4d4d;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.back-button:hover {
+  background: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.upload-content {
+  max-width: 600px;
+  width: 100%;
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.upload-title {
+  color: #ff4d4d;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.upload-subtitle {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.file-input-container {
+  border: 3px dashed #ff4d4d;
+  border-radius: 15px;
+  padding: 40px 20px;
+  background: #fff5f5;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.file-input-container:hover {
+  border-color: #ff3333;
+  background: #ffe6e6;
+}
+
+.file-input-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  color: #ff4d4d;
+}
+
+.file-input-label span {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.file-input-label small {
+  color: #999;
+  font-size: 0.9rem;
+}
+
+.preview-section {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.preview-image {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  object-fit: cover;
+}
+
+.caption-section {
+  text-align: left;
+}
+
+.caption-section label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.caption-textarea {
+  width: 100%;
+  padding: 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 100px;
+  transition: border-color 0.3s ease;
+}
+
+.caption-textarea:focus {
+  outline: none;
+  border-color: #ff4d4d;
+}
+
+.caption-textarea::placeholder {
+  color: #aaa;
+}
+
+.upload-submit-button {
+  background: linear-gradient(135deg, #ff4d4d 0%, #ff3333 100%);
+  color: white;
+  border: none;
+  padding: 18px 40px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 77, 77, 0.3);
+}
+
+.upload-submit-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 77, 77, 0.4);
+}
+
+.upload-submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
 h1 {
   color: #ff4d4d;
   font-size: 2.5rem;
@@ -112,6 +286,43 @@ p {
     min-height: 100vh;
   }
 
+  .upload-page {
+    padding: 15px;
+  }
+
+  .back-button {
+    top: 20px;
+    left: 20px;
+    padding: 10px 15px;
+    font-size: 13px;
+  }
+
+  .upload-content {
+    padding: 30px 20px;
+    margin: 0 10px;
+  }
+
+  .upload-title {
+    font-size: 2rem;
+  }
+
+  .upload-subtitle {
+    font-size: 1rem;
+  }
+
+  .file-input-container {
+    padding: 30px 15px;
+  }
+
+  .file-input-label span {
+    font-size: 1.1rem;
+  }
+
+  .upload-submit-button {
+    padding: 15px 30px;
+    font-size: 1.1rem;
+  }
+
   h1 {
     font-size: 1.8rem;
     margin-bottom: 0.5rem;
@@ -160,6 +371,18 @@ p {
     padding: 8px;
   }
 
+  .upload-content {
+    padding: 25px 15px;
+  }
+
+  .upload-title {
+    font-size: 1.7rem;
+  }
+
+  .file-input-container {
+    padding: 25px 10px;
+  }
+
   h1 {
     font-size: 1.5rem;
   }
@@ -193,12 +416,20 @@ p {
     max-width: 1000px;
   }
 
+  .upload-content {
+    max-width: 700px;
+  }
+
   h1 {
     font-size: 3rem;
   }
 
   h2 {
     font-size: 2.5rem;
+  }
+
+  .upload-title {
+    font-size: 3rem;
   }
 }
 
