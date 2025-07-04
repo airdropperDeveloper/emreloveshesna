@@ -102,13 +102,25 @@ function PhotoStory({ onComplete }) {
   useEffect(() => {
     const loadPhotos = async () => {
       try {
-        const additionalPhotos = await photoService.getAllPhotos()
-        // Sabit fotoğraflar + veritabanından gelen fotoğraflar
-        setPhotos([...staticPhotos, ...additionalPhotos])
+        // Backend'den yeni fotoğrafları çek
+        const backendPhotos = await photoService.getAllPhotos()
+        
+        // Statik fotoğraflar + backend'den gelen fotoğrafları EN SONA ekle
+        const allPhotos = [...staticPhotos, ...backendPhotos]
+        setPhotos(allPhotos)
+        
+        console.log(`Toplam ${allPhotos.length} fotoğraf yüklendi:`)
+        console.log(`- ${staticPhotos.length} mevcut fotoğraf`)
+        console.log(`- ${backendPhotos.length} yeni eklenen fotoğraf`)
+        
+        if (backendPhotos.length > 0) {
+          console.log('Yeni eklenen fotoğraflar:', backendPhotos)
+        }
       } catch (error) {
         console.error("Fotoğraflar yüklenirken hata:", error)
-        // Hata durumunda sadece sabit fotoğrafları göster
+        // Hata durumunda sadece statik fotoğrafları göster
         setPhotos(staticPhotos)
+        console.log("Backend'e bağlanılamadı, sadece mevcut fotoğraflar gösteriliyor")
       } finally {
         setLoading(false)
       }
@@ -205,6 +217,29 @@ function PhotoStory({ onComplete }) {
           >
             {photos[currentPhotoIndex].caption}
           </motion.p>
+          
+          {/* Fotoğraf sayacı ve yeni fotoğraf göstergesi */}
+          <motion.div
+            style={{
+              position: 'absolute',
+              bottom: '100px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              color: '#666',
+              fontSize: '0.9rem',
+              textAlign: 'center'
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.3 }}
+          >
+            <div>{currentPhotoIndex + 1} / {photos.length}</div>
+            {currentPhotoIndex >= staticPhotos.length && (
+              <div style={{ fontSize: '0.8rem', color: '#ff4d4d', marginTop: '5px' }}>
+                ✨ Yeni eklenen fotoğraf
+              </div>
+            )}
+          </motion.div>
         </div>
       </PhotoProvider>
       <div className="navigation">

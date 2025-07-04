@@ -1,43 +1,41 @@
-// MongoDB Atlas Data API konfigürasyonu
-// App Services'dan aldığın bilgileri buraya yazacaksın
-const MONGO_DATA_API_URL = "https://data.mongodb-api.com/app/YOUR_APP_ID/endpoint/data/v1"
-const MONGO_API_KEY = "YOUR_API_KEY"
-const DATABASE_NAME = "photoStory"
-const COLLECTION_NAME = "photos"
-
-// TODO: Yukarıdaki YOUR_APP_ID ve YOUR_API_KEY'i kendi değerlerinle değiştir
-// Örnek: 
-// const MONGO_DATA_API_URL = "https://data.mongodb-api.com/app/data-abc123/endpoint/data/v1"
-// const MONGO_API_KEY = "xyz789abc456def"
+// Backend API Photo Service
+import { API_BASE_URL, API_ENDPOINTS } from '../config/api'
 
 class PhotoService {
   constructor() {
-    this.headers = {
-      "Content-Type": "application/json",
-      "api-key": MONGO_API_KEY
-    }
+    this.apiUrl = `${API_BASE_URL}${API_ENDPOINTS.PHOTOS}`
   }
 
   async getAllPhotos() {
     try {
-      const response = await fetch(`${MONGO_DATA_API_URL}/action/find`, {
-        method: "POST",
-        headers: this.headers,
-        body: JSON.stringify({
-          collection: COLLECTION_NAME,
-          database: DATABASE_NAME,
-          sort: { createdAt: 1 }
-        })
+      const response = await fetch(this.apiUrl, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
       })
 
       if (!response.ok) {
-        const errorData = await response.json()
-        console.error("MongoDB API hatası:", errorData)
-        throw new Error(`Fotoğraflar yüklenirken hata: ${errorData.error}`)
+        console.error(`API hatası: ${response.status}`)
+        return []
       }
 
-      const data = await response.json()
-      return data.documents || []
+      const result = await response.json()
+      
+      // Backend'den gelen veri yapısını frontend formatına çevir
+      if (result.success && result.data && result.data.photos) {
+        const backendPhotos = result.data.photos.map(photo => ({
+          src: photo.url,
+          caption: photo.description || photo.title || 'Yeni fotoğraf',
+          id: photo._id,
+          createdAt: photo.createdAt
+        }))
+        
+        console.log(`Backend'den ${backendPhotos.length} fotoğraf yüklendi`)
+        return backendPhotos
+      }
+      
+      return []
     } catch (error) {
       console.error("Fotoğraflar yüklenirken hata:", error)
       return []
@@ -46,30 +44,27 @@ class PhotoService {
 
   async addPhoto(photoData) {
     try {
-      const newPhoto = {
-        ...photoData,
-        createdAt: new Date().toISOString(),
-        id: Date.now()
-      }
-
-      const response = await fetch(`${MONGO_DATA_API_URL}/action/insertOne`, {
-        method: "POST",
-        headers: this.headers,
+      const response = await fetch(this.apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
-          collection: COLLECTION_NAME,
-          database: DATABASE_NAME,
-          document: newPhoto
+          url: photoData.src,
+          description: photoData.caption,
+          title: photoData.caption,
+          createdAt: new Date().toISOString()
         })
       })
 
       if (!response.ok) {
         const errorData = await response.json()
-        console.error("MongoDB API hatası:", errorData)
-        throw new Error(`Fotoğraf eklenirken hata: ${errorData.error}`)
+        console.error("Backend API hatası:", errorData)
+        throw new Error(`Fotoğraf eklenirken hata: ${errorData.message || 'Backend bağlantı hatası'}`)
       }
 
       const data = await response.json()
-      return { success: true, insertedId: data.insertedId }
+      return { success: true, data }
     } catch (error) {
       console.error("Fotoğraf eklenirken hata:", error)
       throw error
@@ -78,24 +73,21 @@ class PhotoService {
 
   async deletePhoto(photoId) {
     try {
-      const response = await fetch(`${MONGO_DATA_API_URL}/action/deleteOne`, {
-        method: "POST",
-        headers: this.headers,
-        body: JSON.stringify({
-          collection: COLLECTION_NAME,
-          database: DATABASE_NAME,
-          filter: { id: photoId }
-        })
+      const response = await fetch(`${this.apiUrl}/${photoId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
       })
 
       if (!response.ok) {
         const errorData = await response.json()
-        console.error("MongoDB API hatası:", errorData)
-        throw new Error(`Fotoğraf silinirken hata: ${errorData.error}`)
+        console.error("Backend API hatası:", errorData)
+        throw new Error(`Fotoğraf silinirken hata: ${errorData.message}`)
       }
 
       const data = await response.json()
-      return { success: true, deletedCount: data.deletedCount }
+      return { success: true, data }
     } catch (error) {
       console.error("Fotoğraf silinirken hata:", error)
       throw error

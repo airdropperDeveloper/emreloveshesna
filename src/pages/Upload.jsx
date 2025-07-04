@@ -44,7 +44,7 @@ function Upload() {
     if (!response.ok) {
       const errorData = await response.json()
       console.error("Cloudinary hatası:", errorData)
-      throw new Error(`Fotoğraf yükleme hatası: ${errorData.error?.message || 'Bilinmeyen hata'}`)
+      throw new Error(`Fotoğraf yükleme hatası: ${errorData.error?.message || 'Cloudinary preset kontrol edin'}`)
     }
 
     const data = await response.json()
@@ -59,20 +59,27 @@ function Upload() {
 
     setUploading(true)
     try {
+      // 1. Önce Cloudinary'e yükle
       const imageUrl = await uploadToCloudinary(selectedFile)
       
+      // 2. Sonra backend API'ye gönder
       await photoService.addPhoto({
         src: imageUrl,
         caption: caption.trim()
       })
       
-      alert("Fotoğraf başarıyla eklendi! 🎉")
+      // Form temizle
       setSelectedFile(null)
       setCaption("")
       setPreview(null)
       
-      // Ana sayfaya yönlendir
-      navigate("/")
+      // Başarı mesajı göster ve anasayfaya yönlendir
+      alert("Fotoğraf başarıyla eklendi! 🎉\nHikayenizi görmek için anasayfaya yönlendiriliyorsunuz...")
+      
+      // Kısa bir bekleme sonrası anasayfaya yönlendir
+      setTimeout(() => {
+        navigate("/")
+      }, 1500)
       
     } catch (error) {
       console.error("Yükleme hatası:", error)
@@ -118,7 +125,7 @@ function Upload() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.5 }}
         >
-          Birlikte yaşadığınız güzel anıları paylaşın ve hikayenizi büyütün
+          Hikayemize bir anı daha ekleyelim 💕
         </motion.p>
 
         <div className="upload-form">

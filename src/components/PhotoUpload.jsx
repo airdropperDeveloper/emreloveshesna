@@ -42,7 +42,7 @@ function PhotoUpload({ onComplete }) {
     if (!response.ok) {
       const errorData = await response.json()
       console.error("Cloudinary hatası:", errorData)
-      throw new Error(`Fotoğraf yükleme hatası: ${errorData.error?.message || 'Bilinmeyen hata'}`)
+      throw new Error(`Fotoğraf yükleme hatası: ${errorData.error?.message || 'Cloudinary preset kontrol edin'}`)
     }
 
     const data = await response.json()
@@ -57,10 +57,10 @@ function PhotoUpload({ onComplete }) {
 
     setUploading(true)
     try {
-      // Önce Cloudinary'e yükle
+      // 1. Önce Cloudinary'e yükle
       const imageUrl = await uploadToCloudinary(selectedFile)
       
-      // Sonra MongoDB'ye kaydet
+      // 2. Sonra backend API'ye gönder
       await photoService.addPhoto({
         src: imageUrl,
         caption: caption.trim()
