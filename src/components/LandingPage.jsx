@@ -12,6 +12,9 @@ function LandingPage({ onExplore, onGoToUpload }) {
       <h1>Hazırsan başlayalım!</h1>
       <button onClick={onExplore}>Beni dünyanın en güzel çiftinin hikayesine götür.</button>
       <button onClick={onGoToUpload}>Hikayemize yeni anı ekle 📸</button>
+      <a href="tel:+905424056695" style={{ textDecoration: 'none' }}>
+        <button>Emre'yi çok özlediysen ara ☎️🤍</button>
+      </a>
     </motion.div>
   )
 }
